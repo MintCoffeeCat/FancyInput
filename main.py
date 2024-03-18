@@ -1,6 +1,6 @@
-from module.optionGroup.horizontalOptionGroup import HorizontalOptionGroup
-from module.optionGroup.verticalOptionGroup import VerticalOptionGroup
-from module.option import NumberOption,AsciiOption
+from fancyInput.optionGroup.horizontalOptionGroup import HorizontalOptionGroup
+from fancyInput.optionGroup.verticalOptionGroup import VerticalOptionGroup
+from fancyInput.option import NumberOption,AsciiOption
 
 if __name__ == "__main__":
     gr = HorizontalOptionGroup(

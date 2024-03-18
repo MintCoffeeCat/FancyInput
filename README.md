@@ -5,8 +5,11 @@
 A terminal-based python input tool for asking users with several options and except their input.
 
 # Install
+To install this package, type following command in your terminal
 
-We will package it soon.
+```bash
+pip install fancyInput==0.0.14
+```
 
 
 # Usage
