@@ -2,11 +2,10 @@
 import math
 import sys
 
-from rich import print
 from rich.layout import Layout
 from rich.panel import Panel
 
-from ..alignedPanel import CenterAlignedPanel
+from ..baseComponents.alignedPanel import CenterAlignedPanel
 from ..option import Option
 from .optionGroup import OptionGroup
 
@@ -25,20 +24,6 @@ class VerticalOptionGroup(OptionGroup):
         for i in range(self.optNum*3 + 3):
             sys.stdout.write("\033[1A")
             sys.stdout.write("\033[K")
-
-    def ask(self):
-        inputDone = False
-        while not inputDone:
-            print(self.getLayout())
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[K")
-            res = input("│ │ > ")
-            inputDone = self.checkInput(res)
-            self.clear()
-        print(self.getLayout())
-        return res
         
     def getCols(self, list_A):
         list_C = []

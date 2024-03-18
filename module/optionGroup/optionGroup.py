@@ -1,5 +1,7 @@
+import sys
 from typing import List
 
+from rich import print
 from rich.layout import Layout
 from wcwidth import wcswidth
 
@@ -38,22 +40,18 @@ class OptionGroup():
             p.resize(width=self.singleOptionPanelWidth, height=self.singleOptionPanelHeight)
             yield p
     
-    def getLayout(self)->Layout:
-        pass
-    
-    def checkInput(self,input)->bool:
+    def checkInput(self,input)->Option:
         if input == "" and self.defaultIndex != -1:
             self.options[self.defaultIndex].assgin()
-            return True
+            return self.options[self.defaultIndex]
         for opt in self.options:
             try:
                 if opt.checkInput(input):
                     opt.assgin()
-                    return True
+                    return opt
             except InputTypeError as e: 
                 continue
-
-        return False
+        return None
     
     def setDefaultOption(self, option:Option):
         for idx, opt in enumerate(self.options):
@@ -72,6 +70,22 @@ class OptionGroup():
         self.maxOptionPerUnit = maxnum
         self._adjustUnit()
 
+    def ask(self)->Option:
+        selectedOption = None
+        while selectedOption is None:
+            print(self.getLayout())
+            sys.stdout.write("\033[1A")
+            sys.stdout.write("\033[1A")
+            sys.stdout.write("\033[1A")
+            sys.stdout.write("\033[K")
+            res = input("│ │ > ")
+            selectedOption = self.checkInput(res)
+            self.clear()
+        print(self.getLayout())
+        return selectedOption
+    
+    def getLayout(self)->Layout:
+        pass
     
     def clear(self):
         pass
@@ -79,7 +93,5 @@ class OptionGroup():
     def _adjustUnit(self):
         pass
 
-    def ask(self):
-        pass   
 
 

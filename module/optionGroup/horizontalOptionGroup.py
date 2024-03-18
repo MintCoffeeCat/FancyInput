@@ -2,11 +2,10 @@
 import math
 import sys
 
-from rich import print
 from rich.layout import Layout
 from rich.panel import Panel
 
-from ..alignedPanel import CenterAlignedPanel
+from ..baseComponents.alignedPanel import CenterAlignedPanel
 from ..option import Option
 from .optionGroup import OptionGroup
 
@@ -82,19 +81,19 @@ class HorizontalOptionGroup(OptionGroup):
             sys.stdout.write("\033[1A")
             sys.stdout.write("\033[K")
     
-    def ask(self):
-        inputDone = False
-        while not inputDone:
-            print(self.getLayout())
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[1A")
-            sys.stdout.write("\033[K")
-            res = input("│ │ > ")
-            inputDone = self.checkInput(res)
-            self.clear()
-        print(self.getLayout())
-        return res
+    # def ask(self):
+    #     inputDone = False
+    #     while not inputDone:
+    #         print(self.getLayout())
+    #         sys.stdout.write("\033[1A")
+    #         sys.stdout.write("\033[1A")
+    #         sys.stdout.write("\033[1A")
+    #         sys.stdout.write("\033[K")
+    #         res = input("│ │ > ")
+    #         inputDone = self.checkInput(res)
+    #         self.clear()
+    #     print(self.getLayout())
+    #     return res
     
     def _adjustUnit(self):
         self.practicalOptPerLine = self.maxOptionPerUnit if self.maxOptionPerUnit < self.optNum else self.optNum

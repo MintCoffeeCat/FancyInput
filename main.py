@@ -1,6 +1,6 @@
 from module.optionGroup.horizontalOptionGroup import HorizontalOptionGroup
 from module.optionGroup.verticalOptionGroup import VerticalOptionGroup
-from module.option import NumberOption
+from module.option import NumberOption,AsciiOption
 
 if __name__ == "__main__":
     gr = HorizontalOptionGroup(
@@ -11,7 +11,7 @@ if __name__ == "__main__":
             NumberOption("fruit salad"),
         )
     gr.setDefaultOption(0)
-    gr.setMaxOptionPerUnit(3)
+    gr.setMaxOptionPerUnit(4)
     gr.ask()
 
 
