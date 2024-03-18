@@ -1,12 +1,14 @@
 
-from rich.panel import Panel
-from rich.layout import Layout
+import math
+import sys
 
-from module.optionGroup.optionGroup import OptionGroup
-from module.option import Option
-from module.alignedPanel import CenterAlignedPanel
 from rich import print
-import sys,math
+from rich.layout import Layout
+from rich.panel import Panel
+
+from ..alignedPanel import CenterAlignedPanel
+from ..option import Option
+from .optionGroup import OptionGroup
 
 
 class VerticalOptionGroup(OptionGroup):

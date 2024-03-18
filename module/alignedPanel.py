@@ -1,11 +1,11 @@
-from rich import print
-from rich.panel import Panel
-from rich.console import RenderableType
-from rich.style import Style
-from rich.text import Text
-from typing import Tuple, Literal, Union, Optional
-from wcwidth import wcswidth
 import math
+from typing import Optional,  Union
+
+from rich import print
+from rich.console import RenderableType
+from rich.panel import Panel
+from rich.style import Style
+from wcwidth import wcswidth
 
 StyleType = Union[str, "Style"]
 

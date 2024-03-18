@@ -1,13 +1,11 @@
-from rich.panel import Panel
 from rich.style import Style
-from abc import ABC
 
-from exp.exceptions import InputTypeError
-from module.alignedPanel import CenterAlignedPanel
+from .exp.exceptions import InputTypeError
+from .alignedPanel import CenterAlignedPanel
+
 
 class Option():
     def __init__(self, opt:str, name) -> None:
-        
         self.opt = opt 
         self.name = name
         self.assigned = False

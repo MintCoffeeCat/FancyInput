@@ -1,14 +1,15 @@
 
+import math
+import sys
+
 from rich import print
-from rich.panel import Panel
 from rich.layout import Layout
-from wcwidth import wcswidth
+from rich.panel import Panel
 
-from module.optionGroup.optionGroup import OptionGroup
-from module.option import Option
-from module.alignedPanel import CenterAlignedPanel
+from ..alignedPanel import CenterAlignedPanel
+from ..option import Option
+from .optionGroup import OptionGroup
 
-import sys,math
 
 class HorizontalOptionGroup(OptionGroup):
     def __init__(self, question:str, *options:Option) -> None:
