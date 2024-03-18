@@ -6,6 +6,7 @@ A terminal-based python input tool for asking users with several options and exc
 
 # Install
 
+We will package it soon.
 
 
 # Usage
