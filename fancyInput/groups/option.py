@@ -1,16 +1,24 @@
+from typing import Any
 from rich.style import Style
 
-from .exp.exceptions import InputTypeError
-from .baseComponents.alignedPanel import CenterAlignedPanel
+from ..exp.exceptions import InputTypeError
+from ..baseComponents.alignedPanel import CenterAlignedPanel
 
 
 class Option():
-    def __init__(self, opt:str, name) -> None:
+    def __init__(self, opt:str, name:str, func) -> None:
         self.opt = opt 
         self.name = name
         self.assigned = False
         self.gapSpace = ""
-
+        self.func = func
+    
+    def __call__(self, *args: Any, **kwds: Any) -> Any:
+        if self.func is not None:
+            self.func(*args, **kwds)
+        else:
+            raise Exception("No callback function was set.")
+        
     def getPanel(self):
         return CenterAlignedPanel(
             self.name,
@@ -19,6 +27,10 @@ class Option():
                 color= "green" if self.assigned else None
             )
         )
+    
+    def setCallback(self,func)->"Option":
+        self.func = func
+        return self
     
     def assgin(self):
         self.assigned = True
@@ -38,8 +50,8 @@ class Option():
         return self.opt
     
 class NumberOption(Option):
-    def __init__(self, name:str) -> None:
-        super().__init__(None, name)
+    def __init__(self, name:str, func = None) -> None:
+        super().__init__(None, name, func)
     
     def transitionInput(self, input:str):
         if not input.isdigit():
@@ -47,10 +59,10 @@ class NumberOption(Option):
         return input
         
 class AsciiOption(Option):
-    def __init__(self, opt:str, name) -> None:
+    def __init__(self, opt:str, name, func = None) -> None:
         if not opt.isascii():
             raise Exception(f"字母选项的选择头只能是字母！当前为{opt}")
-        super().__init__(opt, name)
+        super().__init__(opt, name, func)
     
     def transitionInput(self, input:str):
         if not input.isascii():

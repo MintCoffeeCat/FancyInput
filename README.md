@@ -8,7 +8,7 @@ A terminal-based python input tool for asking users with several options and exc
 To install this package, type following command in your terminal
 
 ```bash
-pip install fancyInput==0.0.14
+pip install fancyInput
 ```
 
 
@@ -17,7 +17,7 @@ pip install fancyInput==0.0.14
 The input is basically formed with `Option` and `OptionGroup`. To Create a series of Options, you need to
 
 ```python
-import NumberOption
+from fancyInput import NumberOption
 
 options = [
     NumberOption("opt1"),
@@ -29,8 +29,7 @@ options = [
 this code create a list of `NumberOption`, which serve the numbers as input. Then you need put these option into a `OptionGroup` like follows:
 
 ```python
-import HorizontalOptionGroup
-import NumberOption
+from fancyInput import HorizontalOptionGroup, NumberOption
 options = [
     NumberOption("opt1"),
     NumberOption("opt2"),
@@ -70,10 +69,14 @@ print(selectedOpt.name)
 The `HorizontalOptionGroup` will output a group with horizontal listed options like following:
 
 ![](img/horizontal.png)
+<!-- ![](img/https://github.com/MintCoffeeCat/FancyInput/blob/main/img/horizontal.png) -->
+
 
 To output like this, you can do
 
 ```python
+from fancyInput import HorizontalOptionGroup, NumberOption
+
 gr = HorizontalOptionGroup(
         "What receipe do you want for today's dinner?",
         NumberOption("roasted beef"),
@@ -91,9 +94,13 @@ The method `setMaxOptionPerUnit()` is to set maximum number of options in a sing
 The `VerticalOptionGroup` will output a group with Vertical listed options like following:
 
 ![](img/vertical.png)
+<!-- ![](https://github.com/MintCoffeeCat/FancyInput/blob/main/img/vertical.png) -->
+
 
 To output like this, you should do
 ```python
+from fancyInput import VerticalOptionGroup, NumberOption
+
 gr = VerticalOptionGroup(
         "What receipe do you want for today's dinner?",
         NumberOption("roasted beef"),
@@ -108,6 +115,8 @@ The method `setMaxOptionPerUnit()` is to set maximum number of options in a sing
 
 In the `VerticalOptionGroup`, you can manually adjust the width of question box by:
 ```python
+from fancyInput import VerticalOptionGroup, NumberOption
+
 gr = VerticalOptionGroup(
         "What receipe do you want for today's dinner?",
         NumberOption("roasted beef"),
@@ -121,10 +130,13 @@ gr.ask()
 This will output a layout like this:
 
 ![](img/adjustVertical.png)
+<!-- ![](https://github.com/MintCoffeeCat/FancyInput/blob/main/img/adjustVertical.png) -->
 
 ## Default Selection
 Both `VerticalOptionGroup` and `HorizontalOptionGroup` support setting a certain option as the default selection. To enable this feature, you should do:
 ```python
+from fancyInput import VerticalOptionGroup, NumberOption
+
 gr = VerticalOptionGroup(
         "What receipe do you want for today's dinner?",
         NumberOption("roasted beef"),
@@ -140,6 +152,8 @@ In this way, the Option with the index 0 will be the default selection. Once use
 
 What you need to pay attention is that the index is the order of `Option` in the constructor, not the option number displayed on every option. If you mixed use `NumberOption` and `AsciiOption`, this may bring some cofusions. You can also putting a reference of `Option` to assgin the default selection like this:
 ```python
+from fancyInput import VerticalOptionGroup, NumberOption
+
 defaultOption = NumberOption("porridge")
 gr = VerticalOptionGroup(
         "What receipe do you want for today's dinner?",
@@ -156,6 +170,8 @@ gr.ask()
 ## Mix Use of Option
 We designed Two type of Options: `NumberOption` and `AsciiOption`. You can create a `OptionGroup` with `AsciiOption` by
 ```python
+from fancyInput import HorizontalOptionGroup, AsciiOption, NumberOption
+
 gr = HorizontalOptionGroup(
         "What receipe do you want for today's dinner?",
         AsciiOption("A","roasted beef"),
@@ -169,12 +185,15 @@ gr.ask()
 This will looks like:
 
 ![](img/AsciiHorizontal.png)
+<!-- ![](https://github.com/MintCoffeeCat/FancyInput/blob/main/img/AsciiHorizontal.png) -->
 
 You can find that the last two `NumberOption` is labeled with 2 and 3, not 0 and 1.
 
 # User Input Behavior
 We explain the user input behavior with following example:
 ```python
+from fancyInput import HorizontalOptionGroup, NumberOption
+
 gr = HorizontalOptionGroup(
         "What receipe do you want for today's dinner?",
         NumberOption("roasted beef"),
@@ -186,10 +205,12 @@ gr.setMaxOptionPerUnit(4)
 gr.ask()
 ```
 ![](img/horizontal.png)
+<!-- ![](https://github.com/MintCoffeeCat/FancyInput/blob/main/img/horizontal.png) -->
 
 In this example, no default selection is assigned. If User input a number not belonging to the options listed here, the input would be erased and user is asked to re-input. Once user input a valid option, the instance of that option will be returned, and the console would highlight user's selection:
 
 ![](img/selectedHorizontal.png)
+<!-- ![](https://github.com/MintCoffeeCat/FancyInput/blob/main/img/selectedHorizontal.png) -->
 
 # License
 
