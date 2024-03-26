@@ -104,7 +104,6 @@ class OptionGroup():
 class VerticalOptionGroup(OptionGroup):
     def __init__(self, question:str, *options:Option) -> None:
         super().__init__(question, *options)
-        self.questionPanelHeight = self.optNum*self.singleOptionPanelHeight
         self._adjustUnit()
 
     def clear(self):
@@ -151,7 +150,8 @@ class VerticalOptionGroup(OptionGroup):
             self.question,title="Question",
             height=self.questionPanelHeight, 
             width=self.questionPanelWidth,
-            expand=True
+            expand=True,
+            completeCenter=False
         )
         
         # 设置问题和选项的组合ui
@@ -182,7 +182,7 @@ class VerticalOptionGroup(OptionGroup):
         self.practicalOptPerCol = self.maxOptionPerUnit if self.maxOptionPerUnit < self.optNum else self.optNum
         self.countCol = math.ceil(self.optNum/self.practicalOptPerCol)
         # 计算一列以及多列选项的情况下，问题栏的正确高度
-        adaption = (self.singleOptionPanelHeight)*self.practicalOptPerCol
+        adaption = (self.singleOptionPanelHeight)*self.countCol
         self.questionPanelHeight = adaption 
 
 

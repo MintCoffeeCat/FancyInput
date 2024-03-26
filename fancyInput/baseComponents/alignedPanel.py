@@ -34,7 +34,6 @@ class CenterAlignedPanel(Panel):
                  style: Union[str, "Style"] = "none", 
                  width: Optional[int] = None, 
                  height: Optional[int] = None, 
-                 minimumPadding:tuple = MIN_PADDING,
                  expand: bool = True,
                  completeCenter: bool = True
         ) -> None:
@@ -48,7 +47,6 @@ class CenterAlignedPanel(Panel):
         )
         self.expand = expand
         self.completeCenter = completeCenter
-        self.minimumPadding = minimumPadding
         self.renderableLength = wcswidth(renderable)
         self._init_size(width, height)
 
@@ -90,12 +88,12 @@ class CenterAlignedPanel(Panel):
     
     @property
     def minimumWidth(self)->int:
-        l = self.renderableLength + self.minimumPadding[0]*2 + 2
+        l = self.renderableLength + CenterAlignedPanel.MIN_PADDING[0]*2 + 2
         return l
     
     @property
     def minimumHeight(self)->int:
-        h = 1 + self.minimumPadding[1]*2 + 2
+        h = 1 + CenterAlignedPanel.MIN_PADDING[1]*2 + 2
         return h
     
     

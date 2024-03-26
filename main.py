@@ -1,12 +1,12 @@
 from fancyInput.baseComponents.alignedPanel import CenterAlignedPanel
-from fancyInput.groups import HorizontalOptionGroup
+from fancyInput.groups import HorizontalOptionGroup, VerticalOptionGroup
 from fancyInput import NumberOption,AsciiOption
 from fancyInput.asker import Asker
 
 from rich import print
 
 if __name__ == "__main__":
-    gr = HorizontalOptionGroup(
+    gr = VerticalOptionGroup(
             "What receipe do you want for today's dinner?",
             NumberOption("roasted beef").setCallback(lambda:print("roasted beef is selected!!")),
             NumberOption("porridge"),
