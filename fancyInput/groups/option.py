@@ -45,6 +45,11 @@ class Option():
     
     def assgin(self):
         self.assigned = True
+        if self.panel is not None:
+            self.panel.style = Style(
+                color= "green" if self.assigned else None
+            )
+            
     def deAssign(self):
         self.assigned = False
     
