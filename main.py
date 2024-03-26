@@ -11,10 +11,10 @@ if __name__ == "__main__":
             NumberOption("roasted beef").setCallback(lambda:print("roasted beef is selected!!")),
             NumberOption("porridge"),
             NumberOption("barbecue"),
-            NumberOption("fruit salad"),
+            NumberOption("fruit Salad"),
         )
     gr.setDefaultOption(0)
-    gr.setMaxOptionPerUnit(4)
+    gr.setMaxOptionPerUnit(2)
     selected = gr.ask()
     selected()
     

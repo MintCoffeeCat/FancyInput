@@ -12,6 +12,7 @@ class Option():
         self.assigned = False
         self.gapSpace = ""
         self.func = func
+        self.panel = None
     
     def __call__(self, *args: Any, **kwds: Any) -> Any:
         if self.func is not None:
@@ -19,15 +20,24 @@ class Option():
         else:
             raise Exception("No callback function was set.")
         
-    def getPanel(self):
-        return CenterAlignedPanel(
+    def getPanel(self, expand=True, completeCenter = False):
+        if self.panel is not None:
+            return self.panel
+        
+        self.panel = CenterAlignedPanel(
             self.name,
             title=self.opt,
-            expand=True,
+            expand=expand,
+            completeCenter=completeCenter,
             style=Style(
                 color= "green" if self.assigned else None
             )
         )
+        return self.panel
+    
+    def getPanelWidth(self):
+        panel = self.getPanel()
+        return panel.width
     
     def setCallback(self,func)->"Option":
         self.func = func

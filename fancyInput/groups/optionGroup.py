@@ -28,17 +28,16 @@ class OptionGroup():
         self.defaultIndex = -1
         self.maxOptionPerUnit = 3
         self.maxCharacterPerLineOfQuestion = self.lenQuestion
-        self.maxLenOpt = 0
+        self.singleOptionPanelWidth = 0
+        # 一些常量设置
         for idx,opt in enumerate(options):
             if opt.opt is None:
                 opt.opt = str(idx)
             self.options.append(opt)
-            self.maxLenOpt = wcswidth(opt.name) if wcswidth(opt.name) > self.maxLenOpt else self.maxLenOpt
+            self.singleOptionPanelWidth = opt.getPanelWidth() if opt.getPanelWidth() > self.singleOptionPanelWidth else self.singleOptionPanelWidth
         self.optNum = len(self.options)
-        # 一些常量设置
-        self.singleOptionPanelWidth = self.maxLenOpt + CenterAlignedPanel.MIN_PADDING[0]*2
         self.singleOptionPanelHeight = 3
-        self.questionPanelWidth = self.lenQuestion + CenterAlignedPanel.MIN_PADDING[0]*2
+        self.questionPanelWidth = self.lenQuestion + CenterAlignedPanel.MIN_PADDING[0]*2 + 2
         self.inputPanelHeight = 3
     
     def getOptionsPanel(self):
@@ -225,7 +224,7 @@ class HorizontalOptionGroup(OptionGroup):
             self.question,title="Question",
             height=self.inputPanelHeight, 
             width=self.questionPanelWidth,
-            expand=False)
+            expand=True)
         # 设置问题和选项的组合ui
         l_QnO = Layout(name="Quest&Opt",size=self.inputPanelHeight + self.inputPanelHeight*len(lines))
         l_QnO.split_column(

@@ -19,8 +19,9 @@ Attributes:
     height:             The height of whole Panel
     minimumPadding:     The minimum padding of Panel. The detail form of this attribute are listed as:
                         (HorizonPadding, VerticalPadding)
-    expand:              Configure if the panel width should fit the text length + padding. If this attribute are set to False,
+    expand:             Configure if the panel width should fit the text length + padding. If this attribute are set to False,
                         The Panel width may be smaller than text width.
+    completeCenter      Configure if panel width should added by 1 when the padding space can not divided into two equal parts.
 
 """
 class CenterAlignedPanel(Panel):
@@ -34,7 +35,8 @@ class CenterAlignedPanel(Panel):
                  width: Optional[int] = None, 
                  height: Optional[int] = None, 
                  minimumPadding:tuple = MIN_PADDING,
-                 expand: bool = False,
+                 expand: bool = True,
+                 completeCenter: bool = True
         ) -> None:
         super().__init__(
             renderable, 
@@ -45,6 +47,7 @@ class CenterAlignedPanel(Panel):
             height=height
         )
         self.expand = expand
+        self.completeCenter = completeCenter
         self.minimumPadding = minimumPadding
         self.renderableLength = wcswidth(renderable)
         self._init_size(width, height)
@@ -60,25 +63,25 @@ class CenterAlignedPanel(Panel):
         
     def resize(self, width:int = None, height:int = None):
         if width is not None:
-            if not self.expand:
+            if not self.expand and width < self.minimumWidth:
                 warnings.warn(f"The panel width you set is not enough contain text and padding. The text may displayed incomplete and padding incorrect.")
                 self.width = width
             else: 
                 if width < self.minimumWidth:
                     width = self.minimumWidth
-                else: 
+                elif self.completeCenter: 
                     # complete center
                     space = width - self.renderableLength - 2
                     width += space % 2
             self.width = width                
         if height is not None:
-            if not self.expand:
+            if not self.expand and width < self.minimumHeight:
                 warnings.warn(f"The panel height you set is not enough contain text and padding. The text may displayed incomplete and padding incorrect.")
                 self.height = height
             else:
                 if height < self.minimumHeight:
                     height = self.minimumHeight
-                else: 
+                elif self.completeCenter: 
                     # complete center
                     space = height - 3
                     height += space % 2
@@ -100,7 +103,7 @@ class CenterAlignedPanel(Panel):
         paddingLeft = int((self.width - self.renderableLength - 2 )/2)
         if paddingLeft < 0:
             paddingLeft = 0
-        line = 1
+        line = math.ceil(self.renderableLength/self.width)
         paddingTop = int((self.height - 2 - line)/2)
         if paddingTop < 0: 
             paddingTop = 0
