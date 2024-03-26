@@ -23,6 +23,7 @@ class Option():
         return CenterAlignedPanel(
             self.name,
             title=self.opt,
+            expand=True,
             style=Style(
                 color= "green" if self.assigned else None
             )

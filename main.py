@@ -1,6 +1,9 @@
+from fancyInput.baseComponents.alignedPanel import CenterAlignedPanel
 from fancyInput.groups import HorizontalOptionGroup
 from fancyInput import NumberOption,AsciiOption
 from fancyInput.asker import Asker
+
+from rich import print
 
 if __name__ == "__main__":
     gr = HorizontalOptionGroup(
@@ -15,21 +18,26 @@ if __name__ == "__main__":
     selected = gr.ask()
     selected()
     
-    asker = Asker()
-    (asker.startBuild("Question 1")
-            .opt(NumberOption("opt1-1"))
-            .opt(NumberOption("opt1-2")).setDefaultOption()
-        .next("Question 2")
-            .opt(NumberOption("opt2-1")).setDefaultOption()
-            .opt(NumberOption("opt2-2"))
-            .opt(NumberOption("opt2-3"))
-        .next("Question 3")
-            .opt(NumberOption("opt3-1"))
-            .opt(NumberOption("opt3-2"))
-            .opt(NumberOption("opt3-3")).setDefaultOption()
-            .opt(NumberOption("opt3-4")))
-    asker.ask()
-
+    # asker = Asker()
+    # (asker.startBuild("Question 1")
+    #         .opt(NumberOption("opt1-1"))
+    #         .opt(NumberOption("opt1-2")).setDefaultOption()
+    #     .next("Question 2")
+    #         .opt(NumberOption("opt2-1")).setDefaultOption()
+    #         .opt(NumberOption("opt2-2"))
+    #         .opt(NumberOption("opt2-3"))
+    #     .next("Question 3")
+    #         .opt(NumberOption("opt3-1"))
+    #         .opt(NumberOption("opt3-2"))
+    #         .opt(NumberOption("opt3-3")).setDefaultOption()
+    #         .opt(NumberOption("opt3-4")))
+    # asker.ask()
+    # p_question = CenterAlignedPanel(
+    #         "CenterAlignedPanel",title="Question",
+    #         height=1, 
+    #         width=1,
+    #         expand=True)
+    # print(p_question)
 
 
 

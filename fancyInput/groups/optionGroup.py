@@ -36,13 +36,11 @@ class OptionGroup():
             self.maxLenOpt = wcswidth(opt.name) if wcswidth(opt.name) > self.maxLenOpt else self.maxLenOpt
         self.optNum = len(self.options)
         # 一些常量设置
-        self.singleOptionPanelWidth = self.maxLenOpt + 2
+        self.singleOptionPanelWidth = self.maxLenOpt + CenterAlignedPanel.MIN_PADDING[0]*2
         self.singleOptionPanelHeight = 3
-        self.questionPanelWidth = self.lenQuestion + 2
+        self.questionPanelWidth = self.lenQuestion + CenterAlignedPanel.MIN_PADDING[0]*2
         self.inputPanelHeight = 3
-        self.questionPaddingTop = 0
     
-    # @group()
     def getOptionsPanel(self):
         for opt in self.options:
             p = opt.getPanel()
@@ -153,7 +151,8 @@ class VerticalOptionGroup(OptionGroup):
         p_question = CenterAlignedPanel(
             self.question,title="Question",
             height=self.questionPanelHeight, 
-            width=self.questionPanelWidth
+            width=self.questionPanelWidth,
+            expand=True
         )
         
         # 设置问题和选项的组合ui
@@ -225,7 +224,8 @@ class HorizontalOptionGroup(OptionGroup):
         p_question = CenterAlignedPanel(
             self.question,title="Question",
             height=self.inputPanelHeight, 
-            width=self.questionPanelWidth)
+            width=self.questionPanelWidth,
+            expand=False)
         # 设置问题和选项的组合ui
         l_QnO = Layout(name="Quest&Opt",size=self.inputPanelHeight + self.inputPanelHeight*len(lines))
         l_QnO.split_column(
